@@ -19,19 +19,21 @@ class ShopView(ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
+    # שורה ראשונה - זוג כפתורים
     @ui.button(label="קנה Supporter 🎗️", style=discord.ButtonStyle.secondary, custom_id="shop:supporter", row=0)
     async def buy_supp(self, i: discord.Interaction, b: ui.Button):
         await self.handle_purchase(i, 2000, ROLE_SUPPORTER)
 
-    @ui.button(label="קנה VIP 💎", style=discord.ButtonStyle.primary, custom_id="shop:vip", row=1)
+    @ui.button(label="קנה VIP 💎", style=discord.ButtonStyle.primary, custom_id="shop:vip", row=0)
     async def buy_vip(self, i: discord.Interaction, b: ui.Button):
         await self.handle_purchase(i, 5000, ROLE_VIP)
 
-    @ui.button(label="קנה Ticket-Staff 🛠️", style=discord.ButtonStyle.danger, custom_id="shop:staff", row=2)
+    # שורה שנייה - זוג כפתורים
+    @ui.button(label="קנה Ticket-Staff 🛠️", style=discord.ButtonStyle.danger, custom_id="shop:staff", row=1)
     async def buy_staff(self, i: discord.Interaction, b: ui.Button):
         await self.handle_purchase(i, 15000, ROLE_TICKET_STAFF)
 
-    @ui.button(label="בדיקת יתרה 💳", style=discord.ButtonStyle.success, custom_id="shop:bal", row=3)
+    @ui.button(label="בדיקת יתרה 💳", style=discord.ButtonStyle.success, custom_id="shop:bal", row=1)
     async def check_bal(self, i: discord.Interaction, b: ui.Button):
         bal = user_balances.get(i.user.id, 0)
         await i.response.send_message(f"💰 היתרה הנוכחית שלך: `{bal}` מטבעות.", ephemeral=True)
@@ -82,13 +84,13 @@ async def setup_shop(i: discord.Interaction):
     emb = discord.Embed(title="═══ 💠 CYBER-STORE MARKET 💠 ═══", color=0x2b2d31)
     emb.description = "👋 **ברוכים הבאים לחנות!**\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"
     
-    emb.add_field(name="🎗️ | Server-Supporter", value="**Price:** 2,000 Coins\nרול כבוד למשתמשים פעילים.", inline=False)
+    emb.add_field(name="🎗️ | Server-Supporter", value="**Price:** 2,000 Coins\nרול כבוד למשתתפים פעילים.", inline=False)
     emb.add_field(name="💎 | VIP Member", value="**Price:** 5,000 Coins\nגישה לחדרי VIP וצבע בולט.", inline=False)
     emb.add_field(name="🛠️ | TICKET-STAFF", value="**Price:** 15,000 Coins\n**הגישה למערכת הטיקטים!**", inline=False)
     
     emb.set_footer(text="Developed by Nehoray 👑")
     
     await i.channel.send(embed=emb, view=ShopView())
-    await i.response.send_message("החנות באוויר! 🔥", ephemeral=True)
+    await i.response.send_message("החנות באוויר במבנה זוגות! 🔥", ephemeral=True)
 
 bot.run(TOKEN)
