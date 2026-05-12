@@ -88,7 +88,7 @@ async def setup_shop(i: discord.Interaction):
     emb.add_field(name="💎 | VIP Member", value="**Price:** 5,000 Coins\nגישה לחדרי VIP וצבע בולט.", inline=False)
     emb.add_field(name="🛠️ | TICKET-STAFF", value="**Price:** 15,000 Coins\n**הגישה למערכת הטיקטים!**", inline=False)
     
-    emb.set_footer(text="Developed by Nehoray 👑")
+    emb.set_footer(text="Developed by NL 👑")
     
     await i.channel.send(embed=emb, view=ShopView())
     await i.response.send_message("החנות באוויר במבנה זוגות! 🔥", ephemeral=True)
