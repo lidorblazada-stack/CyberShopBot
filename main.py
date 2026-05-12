@@ -48,7 +48,7 @@ class ShopView(ui.View):
         if role in i.user.roles:
             return await i.response.send_message("❌ כבר יש לך את הרול הזה!", ephemeral=True)
 
-        user_balances[i.user.id] -= price
+        user_balances[i.user.id] = bal - price
         await i.user.add_roles(role)
         await i.response.send_message(f"✅ תתחדש! קיבלת את הרול **{role.name}**!", ephemeral=True)
 
@@ -82,14 +82,13 @@ async def setup_shop(i: discord.Interaction):
     emb = discord.Embed(title="═══ 💠 CYBER-STORE MARKET 💠 ═══", color=0x2b2d31)
     emb.description = "👋 **ברוכים הבאים לחנות!**\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"
     
-    emb.add_field(name="🎗️ | Server-Supporter", value="
-http://googleusercontent.com/immersive_entry_chip/0
-http://googleusercontent.com/immersive_entry_chip/1
-http://googleusercontent.com/immersive_entry_chip/2
+    emb.add_field(name="🎗️ | Server-Supporter", value="**Price:** 2,000 Coins\nרול כבוד למשתמשים פעילים.", inline=False)
+    emb.add_field(name="💎 | VIP Member", value="**Price:** 5,000 Coins\nגישה לחדרי VIP וצבע בולט.", inline=False)
+    emb.add_field(name="🛠️ | TICKET-STAFF", value="**Price:** 15,000 Coins\n**הגישה למערכת הטיקטים!**", inline=False)
+    
+    emb.set_footer(text="Developed by Nehoray 👑")
+    
+    await i.channel.send(embed=emb, view=ShopView())
+    await i.response.send_message("החנות באוויר! 🔥", ephemeral=True)
 
-**מה סידרתי:**
-* הורדתי את הבלגן של ה-`value="` ששבר לך את הקוד.
-* הכל עכשיו בתוך מחרוזות בודדות וברורות.
-* ה-Deploy ב-Railway אמור לעבור עכשיו חלק בלי ה-`SyntaxError`.
-
-תדביק, תעשה Push לגיטהאב ותראה איך זה עולה! 🔥🚀
+bot.run(TOKEN)
