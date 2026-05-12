@@ -4,7 +4,7 @@ from discord.ext import commands
 import os
 
 # --- הגדרות IDs (השתמשתי במה ששלחת לי) ---
-TOKEN = "שים_כאן_את_הטוקן_שלך"
+TOKEN = os.getenv('DISCORD_TOKEN')
 MY_USER_ID = 1130542850883469443
 
 # IDs של הרולים לחנות
